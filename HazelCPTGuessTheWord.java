@@ -7,32 +7,38 @@ public class HazelCPTGuessTheWord{
 		char chrMainMenu;
 		String strTheme;
 		String strHighScores;
+		boolean binInvalid;
 		
-		con.println("Play game(p)");
-		con.println("View high scores(v)");
-		con.println("Quit(q)");
-		con.println("Help(h)");
-		chrMainMenu = con.getChar();
+		binInvalid = true;
+		chrMainMenu = ' ';
 		
-		con.clear();
+		while(binInvalid == true){
+			con.clear();
 		
-		if(chrMainMenu == 'p'){
-			TextInputFile themes = new TextInputFile("theme.txt");
-			while(themes.eof() == false){
-				strTheme = themes.readLine();
-				con.println(strTheme);
+			if(chrMainMenu == 'p'){
+				binInvalid = false;
+				TextInputFile themes = new TextInputFile("theme.txt");
+				while(themes.eof() == false){
+					strTheme = themes.readLine();
+					con.println(strTheme);
+				}
+			}else if(chrMainMenu == 'v'){
+				binInvalid = false;
+				con.println("High Scores");
+				TextInputFile highscores = new TextInputFile("highscores.txt");
+				while(highscores.eof() == false){
+					strHighScores = highscores.readLine();
+					con.println(strHighScores);
+				}
+			}else if(chrMainMenu == 'q'){
+				binInvalid = false;
+				con.closeConsole();
+			}else if(chrMainMenu == 'h'){
+				binInvalid = false;
+				con.println("help");
+			}else{
+				chrMainMenu = hazelCPTtools.MainMenu(con);
 			}
-		}else if(chrMainMenu == 'v'){
-			TextInputFile highscores = new TextInputFile("highscores.txt");
-			while(highscores.eof() == false){
-				strHighScores = highscores.readLine();
-				con.println(strHighScores);
-			}
-		}else if(chrMainMenu == 'q'){
-			con.closeConsole();
-		}else if(chrMainMenu == 'h'){
-			con.println("help");
-		}else{
 		}
 	}
 }
