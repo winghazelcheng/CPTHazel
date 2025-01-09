@@ -50,12 +50,56 @@ public class HazelCPTGuessTheWord{
 						for(intRow = 0; intRow < intAmount; intRow++){
 							String strNumber;
 							strWords[intRow][0] = chosentheme.readLine();
-							int intRandom = (int)(Math.random());
+							int intRandom = (int)(Math.random()*100 + 1);
 							strWords[intRow][1] = Integer.toString(intRandom);
 						}
+						String strTempWord;
+						String strTempNo;
+						int intRow2;
+						for(intRow2 = 0;intRow2 < intAmount-1; intRow2++){
+							for(intRow = 0; intRow < intAmount - 1 - intRow2; intRow++){
+								//Bubble sort. If left is bigger that right
+								if(Integer.parseInt(strWords[intRow][1]) > Integer.parseInt(strWords[intRow + 1][1])){
+									//Take that left item
+									strTempWord = strWords[intRow][0];
+									strTempNo = strWords[intRow][1];
+									//Right item moves to the left
+									strWords[intRow][0] = strWords[intRow + 1][0];
+									strWords[intRow][1] = strWords[intRow + 1][1];
+									//Put temporary value on the right
+									strWords[intRow + 1][0] = strTempWord;
+									strWords[intRow + 1][1] = strTempNo;
 						
+								}
+							}
+						}
+						con.println("AFTER");
+						for(intRow = 0; intRow < intAmount; intRow++){
+							con.println(strWords[intRow][0] + " | " + strWords[intRow][1]);
+						}	
+						String strAnswer;
+						strAnswer = "";
+						int intRow3;
+						intRow3 = 0;
+						while(!strAnswer.equalsIgnoreCase("stop")){
+							String strSecret;
+							strSecret = strWords[intRow3][0];
+							intRow3 = intRow3 + 1;
+							int intLength;
+							intLength = strSecret.length();
+							String strLetter[][];
+							strLetter = new String[intLength][2];
+							
+							//public static  
+							for(intRow = 0; intRow < intAmount; intRow++){
+								strWords[intRow][0] = chosentheme.readLine();
+								int intRandom = (int)(Math.random()*100 + 1);
+								strWords[intRow][1] = Integer.toString(intRandom);
+							}
+							
+						}	
 					}
-				}					
+				}				
 				
 			}else if(chrMainMenu == 'v'){
 				binInvalid = false;
