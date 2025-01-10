@@ -18,6 +18,9 @@ public class HazelCPTGuessTheWord{
 		
 			if(chrMainMenu == 'p'){
 				binInvalid = false;
+				String strName;
+				con.println("Enter Username: ");
+				strName = con.readLine();
 				TextInputFile themes = new TextInputFile("theme.txt");
 				while(themes.eof() == false){
 					strTheme = themes.readLine();
