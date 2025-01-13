@@ -14,13 +14,13 @@ public class HazelCPTGuessTheWord{
 		chrMainMenu = ' ';
 		
 		while(binInvalid == true){
-			con.clear();
 		
 			if(chrMainMenu == 'p'){
 				binInvalid = false;
 				String strName;
 				con.println("Enter Username: ");
 				strName = con.readLine();
+				con.clear();
 				TextInputFile themes = new TextInputFile("theme.txt");
 				while(themes.eof() == false){
 					strTheme = themes.readLine();
@@ -84,6 +84,7 @@ public class HazelCPTGuessTheWord{
 						strAnswer = "";
 						int intRow3;
 						intRow3 = 0;
+						con.clear();
 						while(!strAnswer.equalsIgnoreCase("stop")){
 							String strSecret;
 							strSecret = strWords[intRow3][0];
@@ -93,13 +94,18 @@ public class HazelCPTGuessTheWord{
 							String strLetter[][];
 							strLetter = new String[intLength][2];
 							
-							//public static  
-							for(intRow = 0; intRow < intAmount; intRow++){
-								strWords[intRow][0] = chosentheme.readLine();
+							int intCount = 1;
+
+							for(intRow = 0; intRow < intLength; intRow++){
+								
+								strLetter[intRow][0] = strSecret.substring(intCount-1, intCount);
+								intCount = intCount + 1;
 								int intRandom = (int)(Math.random()*100 + 1);
-								strWords[intRow][1] = Integer.toString(intRandom);
+								strLetter[intRow][1] = Integer.toString(intRandom);
 							}
-							
+							for(intRow = 0; intRow < intAmount; intRow++){
+							con.println(strLetter[intRow][0] + " | " + strLetter[intRow][1]);
+						}	
 						}	
 					}
 				}				
@@ -120,6 +126,7 @@ public class HazelCPTGuessTheWord{
 				con.println("help");
 			}else{
 				chrMainMenu = hazelCPTtools.MainMenu(con);
+				con.clear();
 			}
 		}
 	}
