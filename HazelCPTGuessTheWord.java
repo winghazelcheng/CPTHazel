@@ -10,7 +10,7 @@ public class HazelCPTGuessTheWord{
 		boolean binInvalid;
 		String strChooseTheme;
 		String strAnswer;
-		strAnswer = "";
+		
 		
 		binInvalid = true;
 		chrMainMenu = ' ';
@@ -23,6 +23,8 @@ public class HazelCPTGuessTheWord{
 				con.println("Enter Username: ");
 				strName = con.readLine();
 				con.clear();
+				int intScore;
+				intScore = 0;
 				TextInputFile themes = new TextInputFile("theme.txt");
 				while(themes.eof() == false){
 					strTheme = themes.readLine();
@@ -78,14 +80,15 @@ public class HazelCPTGuessTheWord{
 								}
 							}
 						}
-						con.println("AFTER");
-						for(intRow = 0; intRow < intAmount; intRow++){
-							con.println(strWords[intRow][0] + " | " + strWords[intRow][1]);
-						}	
+						//con.println("AFTER");
+						//for(intRow = 0; intRow < intAmount; intRow++){
+							//con.println(strWords[intRow][0] + " | " + strWords[intRow][1]);
+						//}	
 
 						int intRow3;
 						intRow3 = 0;
 						con.clear();
+						strAnswer = "";
 						while(!strAnswer.equalsIgnoreCase("stop")){
 							String strSecret;
 							strSecret = strWords[intRow3][0];
@@ -121,18 +124,20 @@ public class HazelCPTGuessTheWord{
 									}
 								}
 							}
-							for(intRow = 0; intRow < intLength; intRow++){
-							con.println(strLetter[intRow][0] + " | " + strLetter[intRow][1]);
-							}
+							
 							
 							String strGuess;
 							strGuess = "";
 							
 							int intRemTries;
 							intRemTries = intLength - 4;
+	
+							
 							
 							while(!strGuess.equalsIgnoreCase(strSecret)&& intRemTries != 0){
-								
+								for(intRow = 0; intRow < intLength; intRow++){
+									con.println(strLetter[intRow][0] + " | " + strLetter[intRow][1]);
+								}
 							
 								con.println("Remaing tries: " + intRemTries);
 								intRemTries = intRemTries - 1;
@@ -141,16 +146,32 @@ public class HazelCPTGuessTheWord{
 								con.println("Enter");
 								strGuess = con.readLine();
 								
-								if(strGuess.equalsIgnoreCase(strSecret)){
-									con.println("Win");
-								}else{
-									con.println("Lose");
-								}
-							
+								
+								con.clear();
 							}		
+							
+							if(strGuess.equalsIgnoreCase(strSecret)){
+								con.clear();
+								con.println("Win");
+								intScore = intScore + 1;
+								con.println(strName + ", your current score is: " + intScore);
+							}else{
+								con.clear();
+								con.println("Lose");
+								con.println("The correct answer is " + strSecret);
+								con.println(strName + ", your current score is: " + intScore);
+									
+							}
 							con.println("Continue or Stop");
 							strAnswer = con.readLine();
-						}	
+							con.clear();
+						}
+						TextOutputFile highscores = new TextOutputFile("highscores.txt",true);
+						highscores.println(strName);
+						highscores.println(intScore);
+						chrMainMenu = hazelCPTtools.MainMenu(con);
+						con.clear();
+						binInvalid = true;	
 					}
 				}				
 				
