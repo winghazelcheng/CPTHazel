@@ -9,6 +9,8 @@ public class HazelCPTGuessTheWord{
 		String strHighScores;
 		boolean binInvalid;
 		String strChooseTheme;
+		String strAnswer;
+		strAnswer = "";
 		
 		binInvalid = true;
 		chrMainMenu = ' ';
@@ -80,8 +82,7 @@ public class HazelCPTGuessTheWord{
 						for(intRow = 0; intRow < intAmount; intRow++){
 							con.println(strWords[intRow][0] + " | " + strWords[intRow][1]);
 						}	
-						String strAnswer;
-						strAnswer = "";
+
 						int intRow3;
 						intRow3 = 0;
 						con.clear();
@@ -103,9 +104,52 @@ public class HazelCPTGuessTheWord{
 								int intRandom = (int)(Math.random()*100 + 1);
 								strLetter[intRow][1] = Integer.toString(intRandom);
 							}
-							for(intRow = 0; intRow < intAmount; intRow++){
+							
+							for(intRow2 = 0;intRow2 < intLength-1; intRow2++){
+								for(intRow = 0; intRow < intLength - 1 - intRow2; intRow++){
+									//Bubble sort. If left is bigger that right
+									if(Integer.parseInt(strLetter[intRow][1]) > Integer.parseInt(strLetter[intRow + 1][1])){
+										//Take that left item
+										strTempWord = strLetter[intRow][0];
+										strTempNo = strLetter[intRow][1];
+										//Right item moves to the left
+										strLetter[intRow][0] = strLetter[intRow + 1][0];
+										strLetter[intRow][1] = strLetter[intRow + 1][1];
+										//Put temporary value on the right
+										strLetter[intRow + 1][0] = strTempWord;
+										strLetter[intRow + 1][1] = strTempNo;	
+									}
+								}
+							}
+							for(intRow = 0; intRow < intLength; intRow++){
 							con.println(strLetter[intRow][0] + " | " + strLetter[intRow][1]);
-						}	
+							}
+							
+							String strGuess;
+							strGuess = "";
+							
+							int intRemTries;
+							intRemTries = intLength - 4;
+							
+							while(!strGuess.equalsIgnoreCase(strSecret)&& intRemTries != 0){
+								
+							
+								con.println("Remaing tries: " + intRemTries);
+								intRemTries = intRemTries - 1;
+								
+							
+								con.println("Enter");
+								strGuess = con.readLine();
+								
+								if(strGuess.equalsIgnoreCase(strSecret)){
+									con.println("Win");
+								}else{
+									con.println("Lose");
+								}
+							
+							}		
+							con.println("Continue or Stop");
+							strAnswer = con.readLine();
 						}	
 					}
 				}				
