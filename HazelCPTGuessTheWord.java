@@ -5,6 +5,7 @@ public class HazelCPTGuessTheWord{
 		Console con = new Console("Guess the Word", 1280, 720);
 		
 		char chrMainMenu;
+		char chrReturn;
 		String strTheme;
 		String strHighScores;
 		boolean binInvalid;
@@ -14,9 +15,10 @@ public class HazelCPTGuessTheWord{
 		
 		binInvalid = true;
 		chrMainMenu = ' ';
+		chrReturn = ' ';
 		
 		while(binInvalid == true){
-		
+			chrReturn = ' ';
 			if(chrMainMenu == 'p'){
 				binInvalid = false;
 				String strName;
@@ -183,12 +185,30 @@ public class HazelCPTGuessTheWord{
 					strHighScores = highscores.readLine();
 					con.println(strHighScores);
 				}
+				while(chrReturn != 'r'){
+				chrReturn = con.getChar();
+					if(chrReturn == 'r'){
+						con.clear();
+						chrMainMenu = hazelCPTtools.MainMenu(con);
+						con.clear();
+						binInvalid = true;
+					}
+				}
 			}else if(chrMainMenu == 'q'){
 				binInvalid = false;
 				con.closeConsole();
 			}else if(chrMainMenu == 'h'){
 				binInvalid = false;
 				con.println("help");
+				while(chrReturn != 'r'){
+				chrReturn = con.getChar();
+					if(chrReturn == 'r'){
+						con.clear();
+						chrMainMenu = hazelCPTtools.MainMenu(con);
+						con.clear();
+						binInvalid = true;
+					}
+				}
 			}else{
 				chrMainMenu = hazelCPTtools.MainMenu(con);
 				con.clear();
