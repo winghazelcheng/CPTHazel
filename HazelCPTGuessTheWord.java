@@ -10,8 +10,14 @@ public class HazelCPTGuessTheWord{
 		String strHighScores;
 		boolean binInvalid;
 		String strChooseTheme;
-		String strAnswer;
-		
+		int intRow;
+		String strTempWord;
+		String strTempNo;
+		int intRow2;
+		int intAmount;
+		int intScore;
+		String strName;
+	
 		
 		binInvalid = true;
 		chrMainMenu = ' ';
@@ -21,11 +27,9 @@ public class HazelCPTGuessTheWord{
 			chrReturn = ' ';
 			if(chrMainMenu == 'p'){
 				binInvalid = false;
-				String strName;
 				con.println("Enter Username: ");
 				strName = con.readLine();
 				con.clear();
-				int intScore;
 				intScore = 0;
 				TextInputFile themes = new TextInputFile("theme.txt");
 				while(themes.eof() == false){
@@ -43,28 +47,26 @@ public class HazelCPTGuessTheWord{
 						TextInputFile chosentheme = new TextInputFile(strTheme+".txt");
 						themes.close();
 						con.clear();
-						int intAmount = 0;
+						intAmount = 0;
 						while(chosentheme.eof() == false){
 							String strWord;
 							strWord = chosentheme.readLine();
 							intAmount = intAmount + 1;
-							con.println(strWord);
-							con.println(intAmount);
+							System.out.println(strWord);
+							System.out.println(intAmount);
 						}
 						chosentheme.close();
 						String strWords[][];
 						strWords = new String[intAmount][2];
 						chosentheme = new TextInputFile(strTheme+".txt");
-						int intRow;
+
 						for(intRow = 0; intRow < intAmount; intRow++){
 							String strNumber;
 							strWords[intRow][0] = chosentheme.readLine();
 							int intRandom = (int)(Math.random()*100 + 1);
 							strWords[intRow][1] = Integer.toString(intRandom);
 						}
-						String strTempWord;
-						String strTempNo;
-						int intRow2;
+
 						for(intRow2 = 0;intRow2 < intAmount-1; intRow2++){
 							for(intRow = 0; intRow < intAmount - 1 - intRow2; intRow++){
 								//Bubble sort. If left is bigger that right
@@ -82,16 +84,17 @@ public class HazelCPTGuessTheWord{
 								}
 							}
 						}
-						//con.println("AFTER");
-						//for(intRow = 0; intRow < intAmount; intRow++){
-							//con.println(strWords[intRow][0] + " | " + strWords[intRow][1]);
-						//}	
+						System.out.println("AFTER");
+						for(intRow = 0; intRow < intAmount; intRow++){
+							System.out.println(strWords[intRow][0] + " | " + strWords[intRow][1]);
+						}	
 
 						int intRow3;
 						intRow3 = 0;
 						con.clear();
-						strAnswer = "";
-						while(!strAnswer.equalsIgnoreCase("stop")){
+						while(chrReturn != 'r'&& intAmount != 0){
+							intAmount = intAmount -1;
+							chrReturn = ' ';
 							String strSecret;
 							strSecret = strWords[intRow3][0];
 							intRow3 = intRow3 + 1;
@@ -133,6 +136,8 @@ public class HazelCPTGuessTheWord{
 							
 							int intRemTries;
 							intRemTries = intLength - 4;
+							int intTries;
+							intTries = 0;
 	
 							
 							
@@ -144,7 +149,9 @@ public class HazelCPTGuessTheWord{
 								con.println("Remaing tries: " + intRemTries);
 								intRemTries = intRemTries - 1;
 								
-							
+								intTries = intTries + 1;
+								System.out.println("intTries = " + intTries);
+								
 								con.println("Enter");
 								strGuess = con.readLine();
 								
@@ -156,6 +163,7 @@ public class HazelCPTGuessTheWord{
 								con.clear();
 								con.println("Win");
 								intScore = intScore + 1;
+								con.println("It took you " + intTries + " tries");
 								con.println(strName + ", your current score is: " + intScore);
 							}else{
 								con.clear();
@@ -165,12 +173,25 @@ public class HazelCPTGuessTheWord{
 									
 							}
 							con.println("Continue or Stop");
-							strAnswer = con.readLine();
+							while(chrReturn != 'c' && chrReturn != 'r'){
+								chrReturn = con.getChar();
+							}
+							if(intAmount == 0){
+								con.clear();
+								con.println("Wow! You reached the end of the " + strTheme + " category!");
+								con.println("Your final score is " + intScore );
+								con.println("Return to main menu to choose another theme!");
+								while(chrReturn != 'r'){
+								chrReturn = con.getChar();
+								}
+							}
 							con.clear();
 						}
+						
 						TextOutputFile highscores = new TextOutputFile("highscores.txt",true);
 						highscores.println(strName);
 						highscores.println(intScore);
+						highscores.close();
 						chrMainMenu = hazelCPTtools.MainMenu(con);
 						con.clear();
 						binInvalid = true;	
@@ -180,11 +201,44 @@ public class HazelCPTGuessTheWord{
 			}else if(chrMainMenu == 'v'){
 				binInvalid = false;
 				con.println("High Scores");
+				intAmount = 0;
 				TextInputFile highscores = new TextInputFile("highscores.txt");
 				while(highscores.eof() == false){
-					strHighScores = highscores.readLine();
-					con.println(strHighScores);
+					strName = highscores.readLine();
+					intScore = highscores.readInt();
+					System.out.println(strName + intScore);
+					intAmount = intAmount + 1;
 				}
+				highscores.close();
+				String strHighscore[][];
+				strHighscore = new String[intAmount][2];
+				highscores = new TextInputFile("highscores.txt");
+				for(intRow = 0; intRow < intAmount; intRow++){
+					strHighscore[intRow][0] = highscores.readLine();
+					strHighscore[intRow][1] = highscores.readLine();
+				}
+				for(intRow2 = 0;intRow2 < intAmount-1; intRow2++){
+					for(intRow = 0; intRow < intAmount - 1 - intRow2; intRow++){
+						//Bubble sort. If left is bigger that right
+						if(Integer.parseInt(strHighscore[intRow][1]) < Integer.parseInt(strHighscore[intRow + 1][1])){
+							//Take that left item
+							strTempWord = strHighscore[intRow][0];
+							strTempNo = strHighscore[intRow][1];
+							//Right item moves to the left
+							strHighscore[intRow][0] = strHighscore[intRow + 1][0];
+							strHighscore[intRow][1] = strHighscore[intRow + 1][1];
+							//Put temporary value on the right
+							strHighscore[intRow + 1][0] = strTempWord;
+							strHighscore[intRow + 1][1] = strTempNo;
+						
+						}
+					}
+				}
+				System.out.println("AFTER");
+				for(intRow = 0; intRow < intAmount; intRow++){
+					con.println(strHighscore[intRow][0] + " | " + strHighscore[intRow][1]);
+				}
+					
 				while(chrReturn != 'r'){
 				chrReturn = con.getChar();
 					if(chrReturn == 'r'){
