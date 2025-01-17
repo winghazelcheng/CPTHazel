@@ -22,15 +22,20 @@ public class HazelCPTGuessTheWord{
 		binInvalid = true;
 		chrMainMenu = ' ';
 		chrReturn = ' ';
+		boolean binWrong;
+		binWrong = true;
 		
 		while(binInvalid == true){
 			chrReturn = ' ';
 			if(chrMainMenu == 'p'){
 				binInvalid = false;
+				con.clear();
 				con.println("Enter Username: ");
 				strName = con.readLine();
 				con.clear();
 				intScore = 0;
+				strTheme = "";
+				strChooseTheme = "l";
 				TextInputFile themes = new TextInputFile("theme.txt");
 				while(themes.eof() == false){
 					strTheme = themes.readLine();
@@ -44,6 +49,7 @@ public class HazelCPTGuessTheWord{
 				while(themes.eof() == false && strChooseTheme != strTheme){
 					strTheme = themes.readLine();
 					if(strChooseTheme.equalsIgnoreCase(strTheme)){
+						binWrong = false;
 						TextInputFile chosentheme = new TextInputFile(strTheme+".txt");
 						themes.close();
 						con.clear();
@@ -138,14 +144,20 @@ public class HazelCPTGuessTheWord{
 							intRemTries = intLength - 4;
 							int intTries;
 							intTries = 0;
+							
+							if(strName.equalsIgnoreCase("statitan")){
+								intRemTries = intRemTries + 1;
+							}
 	
 							
 							
 							while(!strGuess.equalsIgnoreCase(strSecret)&& intRemTries != 0){
 								for(intRow = 0; intRow < intLength; intRow++){
-									con.println(strLetter[intRow][0] + " | " + strLetter[intRow][1]);
+									System.out.println(strLetter[intRow][0] + " | " + strLetter[intRow][1]);
+									con.print(strLetter[intRow][0] + " ");
 								}
-							
+								
+								con.println();
 								con.println("Remaing tries: " + intRemTries);
 								intRemTries = intRemTries - 1;
 								
@@ -170,9 +182,10 @@ public class HazelCPTGuessTheWord{
 								con.println("Lose");
 								con.println("The correct answer is " + strSecret);
 								con.println(strName + ", your current score is: " + intScore);
+								binWrong = false;
 									
 							}
-							con.println("Continue or Stop");
+							con.println("Continue(c) or Return to Main Menu(r)");
 							while(chrReturn != 'c' && chrReturn != 'r'){
 								chrReturn = con.getChar();
 							}
@@ -180,24 +193,27 @@ public class HazelCPTGuessTheWord{
 								con.clear();
 								con.println("Wow! You reached the end of the " + strTheme + " category!");
 								con.println("Your final score is " + intScore );
-								con.println("Return to main menu to choose another theme!");
+								con.println("Return to main menu to choose another theme! (r)");
 								while(chrReturn != 'r'){
 								chrReturn = con.getChar();
 								}
 							}
 							con.clear();
 						}
-						
-						TextOutputFile highscores = new TextOutputFile("highscores.txt",true);
-						highscores.println(strName);
-						highscores.println(intScore);
-						highscores.close();
-						chrMainMenu = hazelCPTtools.MainMenu(con);
-						con.clear();
-						binInvalid = true;	
+					
+							TextOutputFile highscores = new TextOutputFile("highscores.txt",true);
+							highscores.println(strName);
+							highscores.println(intScore);
+							highscores.close();
+							chrMainMenu = hazelCPTtools.MainMenu(con);
+							con.clear();	
+							binInvalid = true;
 					}
-				}				
 				
+				
+					
+				}				
+			
 			}else if(chrMainMenu == 'v'){
 				binInvalid = false;
 				con.println("High Scores");
@@ -253,7 +269,25 @@ public class HazelCPTGuessTheWord{
 				con.closeConsole();
 			}else if(chrMainMenu == 'h'){
 				binInvalid = false;
-				con.println("help");
+				con.println("To start gameplay, type 'p' in main menu. ");
+				con.println("Enter your username and select your theme. ");
+				con.println("You have a limited amount of tries to guess the scrambled word. ");
+				con.println("If you guess correctly, you gain a point. ");
+				con.println("You can choose to continue or return to main menu after each round.");
+				con.println("TIP: look for the capitalized letter to indicate the start.");
+				con.println("Return to Main Menu (R)");
+				while(chrReturn != 'r'){
+				chrReturn = con.getChar();
+					if(chrReturn == 'r'){
+						con.clear();
+						chrMainMenu = hazelCPTtools.MainMenu(con);
+						con.clear();
+						binInvalid = true;
+					}
+				}
+			}else if(chrMainMenu == 's'){
+				con.println("What did the big flower say to the little flower?");
+				con.println("HEY BUD!");
 				while(chrReturn != 'r'){
 				chrReturn = con.getChar();
 					if(chrReturn == 'r'){
