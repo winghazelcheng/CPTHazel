@@ -8,18 +8,11 @@ public class HazelCPTGuessTheWord{
 		
 		char chrMainMenu;
 		char chrReturn;
-		String strTheme;
-		String strHighScores;
-		boolean binInvalid;
-		String strChooseTheme;
-		int intRow;
-		String strTempWord;
-		String strTempNo;
-		int intRow2;
-		int intAmount;
-		int intScore;
 		String strName;
-		int intHalf;
+		String strTheme;
+		String strChooseTheme;
+		boolean binInvalid;
+		int intScore;
 		int intLength;
 	
 		
@@ -29,7 +22,7 @@ public class HazelCPTGuessTheWord{
 		
 		while(binInvalid == true){
 			chrReturn = ' ';
-			if(chrMainMenu == 'p'){
+			if(chrMainMenu == 'p' || chrMainMenu == 'P'){
 				binInvalid = false;
 				con.clear();
 			
@@ -63,28 +56,28 @@ public class HazelCPTGuessTheWord{
 					
 								
 			
-			}else if(chrMainMenu == 'v'){
+			}else if(chrMainMenu == 'v' || chrMainMenu == 'V'){
 				binInvalid = false;
 				hazelCPTtools.Highscores(con);	
-				while(chrReturn != 'r'){
+				while(chrReturn != 'r' && chrReturn != 'R'){
 				chrReturn = con.getChar();
-					if(chrReturn == 'r'){
-						con.clear();
+					if(chrReturn == 'r' || chrReturn == 'R'){
+						con.clear(); 
 						chrMainMenu = hazelCPTtools.MainMenu(con);
 						con.setBackgroundColor(Color.black);
 						con.clear();
 						binInvalid = true;
 					}
 				}
-			}else if(chrMainMenu == 'q'){
+			}else if(chrMainMenu == 'q' || chrMainMenu == 'Q'){
 				binInvalid = false;
 				con.closeConsole();
-			}else if(chrMainMenu == 'h'){
+			}else if(chrMainMenu == 'h' || chrMainMenu == 'H'){
 				binInvalid = false;
 				hazelCPTtools.Help(con);
-				while(chrReturn != 'r'){ 
+				while(chrReturn != 'r' && chrReturn != 'R'){ 
 				chrReturn = con.getChar();
-					if(chrReturn == 'r'){
+					if(chrReturn == 'r' || chrReturn == 'R'){
 						con.clear();
 						chrMainMenu = hazelCPTtools.MainMenu(con);
 						con.setBackgroundColor(Color.black);
@@ -92,12 +85,12 @@ public class HazelCPTGuessTheWord{
 						binInvalid = true;
 					}
 				}
-			}else if(chrMainMenu == 's'){
+			}else if(chrMainMenu == 's' || chrMainMenu == 'S'){
 				binInvalid=false;
 				hazelCPTtools.Secret(con);
-				while(chrReturn != 'r'){
+				while(chrReturn != 'r' && chrReturn != 'R'){
 				chrReturn = con.getChar();
-					if(chrReturn == 'r'){
+					if(chrReturn == 'r' || chrReturn == 'R'){
 						con.clear();
 						chrMainMenu = hazelCPTtools.MainMenu(con);
 						con.clear();

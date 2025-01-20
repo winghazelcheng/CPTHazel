@@ -97,7 +97,7 @@ public class hazelCPTtools{
 		}
 		themes.close();
 		con.println();
-		con.println("                                          (Do not enter numbers)");
+		con.println("                                          **Do not enter numbers**");
 		con.println("                                      ------------------------------");
 		con.println("                                               Enter Choice:");
 		con.println("                                      ------------------------------");
@@ -196,7 +196,7 @@ public class hazelCPTtools{
 			con.println("                          You now have one more try each round to guess the word!");
 			con.println("                                       Press (C) to continue game!");
 			con.println("                        -----------------------------------------------------------");
-			while(chrReturn != 'c'){
+			while(chrReturn != 'c' && chrReturn != 'C'){
 				chrReturn = con.getChar();
 			}
 		}
@@ -291,6 +291,9 @@ public class hazelCPTtools{
 		con.println();
 		con.println();
 		con.println("                                                                                   Return to Main Menu(R)");
+		
+		BufferedImage imgCrown = con.loadImage("crown.jpg");
+		con.drawImage(imgCrown, 390, 107);
 	}
 	
 	//Win/Lose Screen
@@ -362,7 +365,7 @@ public class hazelCPTtools{
 		con.println("                             -------------------------------------------------");
 		con.println("                                 Continue(C)        Return to Main Menu(R)");
 		con.println("                             -------------------------------------------------");
-		while(chrReturn != 'c' && chrReturn != 'r'){
+		while(chrReturn != 'c' && chrReturn != 'C' && chrReturn != 'r' && chrReturn != 'R'){
 			chrReturn = con.getChar();
 		}
 		return chrReturn;
@@ -396,7 +399,7 @@ public class hazelCPTtools{
 			con.println("                                         Your final score is " + intScore + "!" );
 			con.println("                              Return to main menu (R) to choose another theme!");
 			con.println("                        -----------------------------------------------------------");
-			while(chrReturn != 'r'){
+			while(chrReturn != 'r' && chrReturn != 'R'){
 				chrReturn = con.getChar();
 			}
 		}
@@ -469,7 +472,7 @@ public class hazelCPTtools{
 						chrReturn = hazelCPTtools.StatitanScreen(strName, con);
 	
 						con.clear();
-						while(chrReturn != 'r'&& intAmount != 0){
+						while(chrReturn != 'r' && chrReturn != 'R' && intAmount != 0){
 							intAmount = intAmount -1;
 							chrReturn = ' ';
 							String strSecret;
@@ -545,7 +548,7 @@ public class hazelCPTtools{
 								}
 								con.println();
 								con.println();
-								con.println("                                           (Do Not Enter Spaces)");
+								con.println("                                          **Do Not Enter Spaces**");
 								
 								intRemTries = intRemTries - 1;
 								
