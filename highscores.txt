@@ -10,8 +10,6 @@ fluffy
 2
 teach
 5
-gojosfeet
-43
 aki
 2
 cla
@@ -68,3 +66,5 @@ statitan
 10
 statitan
 1
+cc
+31
