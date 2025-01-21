@@ -222,7 +222,7 @@ public class hazelCPTtools{
 			con.println("                                       Press (C) to continue game!");
 			con.println("                        -----------------------------------------------------------");
 			
-			//Loop untill entered c for continue
+			//Loop until entered c for continue
 			while(chrReturn != 'c' && chrReturn != 'C'){
 				chrReturn = con.getChar();
 			}
@@ -468,7 +468,7 @@ public class hazelCPTtools{
 	
 	//Correspond theme from file to entered theme
 	public static String FindTheme(String strTheme, String strChooseTheme){
-		//Loop untill found theme or end of file(will reset)
+		//Loop until found theme or end of file(will reset)
 		TextInputFile themes = new TextInputFile("theme.txt");
 		while(themes.eof() == false && !strChooseTheme.equalsIgnoreCase(strTheme)){
 			strTheme = themes.readLine();
@@ -555,7 +555,7 @@ public class hazelCPTtools{
 	
 			con.clear();
 			
-			//Loop untill user chooses return or array reaches end
+			//Loop until user chooses return or array reaches end
 			while(chrReturn != 'r' && chrReturn != 'R' && intAmount != 0){
 				chrReturn = ' ';
 				
