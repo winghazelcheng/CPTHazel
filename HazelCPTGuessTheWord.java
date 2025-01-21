@@ -70,9 +70,7 @@ public class HazelCPTGuessTheWord{
 				
 				//Gameplay
 				chrMainMenu = hazelCPTtools.Play(con, strTheme, strChooseTheme, chrReturn, strName, intScore, chrMainMenu);
-				binInvalid = true;
-				
-					
+				binInvalid = true;		
 								
 			//Press v for View High Score
 			}else if(chrMainMenu == 'v' || chrMainMenu == 'V'){

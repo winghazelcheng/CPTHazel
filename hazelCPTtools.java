@@ -658,6 +658,7 @@ public class hazelCPTtools{
 					
 					//Read entered guess
 					strGuess = con.readLine();
+					System.out.println(strGuess);
 					
 					//Reduce remaining tries, count tries taken
 					intRemTries = intRemTries - 1;		
