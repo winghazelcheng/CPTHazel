@@ -96,8 +96,6 @@ public class hazelCPTtools{
 	//Print + Enter themes
 	public static String Theme(Console con){
 		//Variables
-		int intThemecount;
-		intThemecount = 0;
 		String strTheme;
 		String strChooseTheme;
 		
@@ -110,17 +108,14 @@ public class hazelCPTtools{
 		con.println();
 		con.println("                                      ----------- Themes -----------");
 		con.println();
-		//con.println();
 		//Read and print from opened theme file
 		TextInputFile themes = new TextInputFile("theme.txt");
 		while(themes.eof() == false){
-			//intThemecount = intThemecount + 1;
 			strTheme = themes.readLine();
 			con.println("                                            " + strTheme);
 		}
 		themes.close();
 		con.println();
-		//con.println("                                          **Do not enter numbers**");
 		con.println("                                      ------------------------------");
 		con.println("                                               Choose Theme:");
 		con.println("                                      ------------------------------");
