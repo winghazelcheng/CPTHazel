@@ -1,6 +1,6 @@
 HololiveJP
 MTRStations
 Vocaloid
-ClassicalComposors
+ClassicalComposers
 Shakespeare
 Fruit

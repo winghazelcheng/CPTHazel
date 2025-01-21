@@ -84,6 +84,11 @@ public class hazelCPTtools{
 		
 		//Read entered username
 		strName = con.readLine();
+		
+		//If player forgets to enter username
+		if(strName.equals("")){
+			strName = "Player";
+		}
 				
 		return strName;
 	}
@@ -105,16 +110,17 @@ public class hazelCPTtools{
 		con.println();
 		con.println("                                      ----------- Themes -----------");
 		con.println();
+		//con.println();
 		//Read and print from opened theme file
 		TextInputFile themes = new TextInputFile("theme.txt");
 		while(themes.eof() == false){
-			intThemecount = intThemecount + 1;
+			//intThemecount = intThemecount + 1;
 			strTheme = themes.readLine();
-			con.println("                                          " + intThemecount + ". " + strTheme);
+			con.println("                                            " + strTheme);
 		}
 		themes.close();
 		con.println();
-		con.println("                                          **Do not enter numbers**");
+		//con.println("                                          **Do not enter numbers**");
 		con.println("                                      ------------------------------");
 		con.println("                                               Choose Theme:");
 		con.println("                                      ------------------------------");
@@ -292,6 +298,7 @@ public class hazelCPTtools{
 		//Print Layout
 		con.println();
 		con.println("                                               Leaderboard");
+		con.println("                                                 (Top 20)");
 		con.println();	
 		con.println("                                    Name                         Score");
 		con.println();	
@@ -320,11 +327,10 @@ public class hazelCPTtools{
 		
 		con.println();
 		con.println();
-		con.println();
 		con.println("                                                                                   Return to Main Menu(R)");
 		
 		BufferedImage imgCrown = con.loadImage("crown.jpg");
-		con.drawImage(imgCrown, 390, 107);
+		con.drawImage(imgCrown, 390, 132);
 	}
 	
 	//Win/Lose Screen
@@ -642,14 +648,18 @@ public class hazelCPTtools{
 					con.println();
 					con.println();
 					con.println();
+					con.println();
+					con.println();
 					con.println("                                          **Do Not Enter Spaces**");			
 					con.println("                                       ------------------------------");
-					con.println("                                                Guess Word:");
+					con.println("                                         Unscramble the word above:");
 					con.println("                                       ------------------------------");
 					con.print("                                         ");
 					
 					BufferedImage imgCheer = con.loadImage("ganbare suisei.jpg");	
 					con.drawImage(imgCheer, 1000, 450);
+					BufferedImage imgGrey = con.loadImage("grey.jpg");
+					con.drawImage(imgGrey, 0, 220);
 					
 					//Read entered guess
 					strGuess = con.readLine();
