@@ -1,3 +1,14 @@
+/*---------------------------------------------------------------------------------------
+ * Name: Guess the Word
+ * Purpose: The program prompts the user to select a theme and unscramble the given words 
+            related to the theme. Points accumulate if the user guesses correctly. Users 
+            can choose to leave game after every round. 
+ * Author: Hazel Cheng
+ * Date created: 17 - 1 - 2025
+ * V2. 5. 0
+-----------------------------------------------------------------------------------------
+*/
+
 import arc.*;
 import java.awt.*;
 import java.awt.image.*;
